@@ -1,6 +1,4 @@
-# ibm-cloud-functions-serverless-blockchain
-
-**Use Cloud Functions to Send Your Data to Your Blockchain**
+# **Use Cloud Functions to Send Your Data to Your Blockchain**
 
 This tutorial will show you how to use IBM Cloud Functions to connect your devices and applications to your blockchain. We\'ll provide code for two cloud functions and step-by-step instructions to deploy and test those cloud functions, allowing you to store your blockchain credentials in your Cloudant database and use those credentials to securely send transactions to your blockchain.  
  
