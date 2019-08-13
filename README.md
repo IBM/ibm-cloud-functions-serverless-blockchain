@@ -145,11 +145,13 @@ After the prerequisites are installed, it should take you about 45 minutes to co
       "connection": {{connectionJson}} 
     }
     ```  
+    
     - Supply any value for "id".  This will be the value you send with each transaction.  
-    - For username, supply the name of the user you noted from the credential file in a previous step.  If your display name does not match your user's name, e.g. if your display name in your blockchain platform for your user is "Org1 admin" but you know you used the "admin" user credentials for that user, supply "admin" for "username" in the request body.  
+    - For "username", supply the name of the user you noted from the credential file in a previous step.  If your display name does not match your user's name, e.g. if your display name in your blockchain platform for your user is "Org1 admin" but you used the "admin" user credentials for that user, supply "admin" for "username" in the request body.  
 
     ***Send the request***  
     Save your changes and click "Send" to store your credentials in your Cloudant database.  You will use these credentials to send each transaction to your blockchain.  
+    
 
 9.  **Send a transaction to your blockchain**  
 
@@ -163,15 +165,15 @@ After the prerequisites are installed, it should take you about 45 minutes to co
 
     ***Set your request parameters***  
     Click on the request "Body" tab and edit the JSON:  
-    
-    ```  
-    {  
-      "id": "admin-myFabric",  
-      "fcn": "createShipment",  
-      "args": [ "1000", "Shipment of widgets", 
-        "30.2672", "97.7431", "103", ".35" ]  
-    }  
-    ```  
+
+    ```
+    { 
+      "id": "admin-myFabric",
+      "fcn": "createShipment",
+      "args": [ "1000", "Shipment of widgets",
+        "30.2672", "97.7431", "103", ".35" ]  
+    }
+    ```
     Supply the value for "id" that you used in the previous step. This specifies the credentials you will use to send transactions to your blockchain.  
 
     ***Send the request***  
