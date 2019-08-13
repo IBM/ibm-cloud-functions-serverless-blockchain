@@ -145,16 +145,15 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     Update the URL field of the "Create or update credentials" REST call with the URL for the store-credentials-cloudant action, obtained in a previous step.  
     
     ***Set your request parameters***  
-    Click on the request "Body" tab and edit the JSON:  
-
+    Click on the request "Body" tab and edit the JSON:  
     ```  
-    {  
-      "id": "admin-myFabric",  
-      "contract": "iot-shipping-contract",  
-      "username": "admin",  
-      "cert": {{userCert}},  
-      "key": {{privateKey}},  
-      "connection": {{connectionJson}}  
+    {  
+      "id": "admin-myFabric",  
+      "contract": "iot-shipping-contract",  
+      "username": "admin",  
+      "cert": {{userCert}},  
+      "key": {{privateKey}},  
+      "connection": {{connectionJson}}
     }  
     ```  
     
