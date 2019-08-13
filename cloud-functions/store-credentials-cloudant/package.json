@@ -1,0 +1,18 @@
+{
+    "name": "store-credentials-cloudant",
+    "version": "0.0.1",
+    "description": "store-credentials-cloudant action",
+    "main": "store-credentials-cloudant.js",
+    "engines": {
+        "node": "8.15.0",
+        "npm": ">=5"
+    },
+    "scripts": {},
+    "engineStrict": true,
+    "author": "Carole Corley",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@cloudant/cloudant": "^4.1.0"
+    },
+    "devDependencies": {}
+}
