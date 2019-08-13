@@ -1,7 +1,6 @@
-**Use Cloud Functions to Send Your Data to Your Blockchain**
+# **Use Cloud Functions to Send Your Data to Your Blockchain**
 
 This tutorial will show you how to use IBM Cloud Functions to connect your devices and applications to your blockchain. We\'ll provide code for two cloud functions and step-by-step instructions to deploy and test those cloud functions, allowing you to store your blockchain credentials in your Cloudant database and use those credentials to securely send transactions to your blockchain.  
- 
 
 **Learning objectives**
 
@@ -37,16 +36,17 @@ Why are Docker and Node.js needed?  You will need these tools to build the clou
 
 **Estimated time** 
 
-After the prerequisites are installed, it should take you about 30 minutes to complete this tutorial. 
+After the prerequisites are installed, it should take you about 45 minutes to complete this tutorial. 
 
 **Steps**
 
 1.  **Clone the repository**  
-    `$git clone https://github.com/IBM/ibm-cloud-functions-serverless-blockchain.git` 
+    `git clone https://github.com/IBM/ibm-cloud-functions-serverless-blockchain.git`  
+    Note: All directories mentioned in this tutorial are relative to the base directory of this project.  
 
 2.  **Install the IBM Cloud CLI**  
-    Follow the [installation instructions](https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started) to install the IBM Cloud command-line tool. Make sure you run the test action  
-    `$ibmcloud wsk action invoke /whisk.system/utils/echo -p message hello --result\`  
+    Follow the [installation instructions](https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started) to install the IBM Cloud command-line tool. Make sure you run the test action  
+    `ibmcloud wsk action invoke /whisk.system/utils/echo -p message hello --result\`  
     so that your  ~/.wskprops  is pointing to the right account. 
 
 3.  **Deploy the provided cloud functions**  
@@ -54,83 +54,71 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     ***Deploy the send-to-blockchain cloud function to your IBM Cloud account***   
     a. Add your cloudant URL to line 8 of send-to-blockchain.js and save the file:  
     const dbUrl = "\<add-your-cloudant-url-here\>"  
-    
     b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
+    `cd cloud-functions/send-to-blockchain`  
+    c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
+    `$ docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
+    Once inside the container, run `npm i` then `exit`.  
+    d. Zip up the source code and generated node\_modules directory for the action:  
+    `$ zip -r action.zip *`  
+    e. Create the action in your IBM Cloud account:  
+    `ibmcloud wsk action create send-to-blockchain \--kind nodejs:8 action.zip`  
     
-    c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  `$ docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`  Once inside the container, run `npm i` then `exit`.  
-    
-    d. Zip up the source code and generated node\_modules directory for the action:  `$ zip -r action.zip *`  
-    
-    e. Create the action in your IBM Cloud account:  
-`$ ibmcloud wsk action create send-to-blockchain \--kind nodejs:8 action.zip`
 
     ***Deploy the store-credentials-cloudant cloud function to your IBM Cloud account***  
-    a. Add your cloudant URL to line 7 of store-credentials-cloudant.js and save the file:  
-    const dbUrl = "\<add-your-cloudant-url-here\>"  
-    
-    b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
-    
-    c. Generate the node_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:   
-    `$ docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`  
-    Once inside the container, run `npm i` then `exit`.  
-    
-    d. Zip up the source code and generated node_modules directory for the action:  
-    `$ zip -r action.zip *`  
-    
+    a. Add your cloudant URL to line 7 of store-credentials-cloudant.js:  
+    `const dbUrl = "<add-your-cloudant-url-here>"`  
+    and save the file.  
+    b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
+    `cd cloud-functions/store-credentials-cloudant`  
+    c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
+    `docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`  
+    Once inside the container, run `npm i` then `exit`.  
+    d. Zip up the source code and generated node_modules directory for the action:  
+    `zip -r action.zip *`  
     e. Create the action in your IBM Cloud account:   
-    `$ ibmcloud wsk action create store-credentials-cloudant \--kind nodejs:8 action.zip`
-
+    `ibmcloud wsk action create store-credentials-cloudant \--kind nodejs:8 action.zip`
 
 4.  **Obtain the API key and URLs for your cloud functions**  
 
-    a. From the IBM Cloud menu, select "Functions".  
-    
-    b. In the next menu, click on "Actions", then click on the "send-to-blockchain" action.  
-    
-    c. In the next menu, click on "Endpoints", then click on "API-KEY" on the resulting panel.  
-    
+    a. From the IBM Cloud menu, select "Functions".  
+    b. In the next menu, click on "Actions", then click on the "send-to-blockchain" action.  
+    c. In the next menu, click on "Endpoints", then click on "API-KEY" on the resulting panel.  
     d. In the section "CF-based API key for this namespace" click the eye icon to view your API key and copy the API key.  
-    
-    e. Save this value, which you'll need to configure your Postman REST calls to your cloud functions.
-    
+    e. Save this value, which you'll need to configure your Postman REST calls to your cloud functions.  
     f. In the same section, copy the URL and save this value.  
-    
     g. From the IBM Cloud Function menu, select "Actions" and click on the "store-credentials-cloudant" action.  
-    
     h. In the next menu, click on "Endpoints".  
-    
     i. In the section "CF-based API key for this namespace" , copy the URL and save this value, which you'll need to configure your Postman REST calls to your cloud functions in an upcoming step. 
 
 5.  **Install the provided blockchain smart contract**  
-    Follow the [instructions](https://cloud.ibm.com/docs/services/blockchain/howto?topic=blockchain-ibp-console-smart-contracts#ibp-console-smart-contracts-install) to install and instantiate the provided iot-shipping-contract.cds smart contract on your peer in your IBM Blockchain Platform instance.  TODO: provide location in cloned repo from step 1  
+    Follow the [instructions](https://cloud.ibm.com/docs/services/blockchain/howto?topic=blockchain-ibp-console-smart-contracts#ibp-console-smart-contracts-install) to install and instantiate the smart contract:   
+    `tutorials/cf-send-to-blockchain/iot-shipping-contract.cds`  
+    on your peer in your IBM Blockchain Platform instance.    
 
 6.  **Download blockchain credentials and connection profile**  
     
-    a. Follow the [instructions](https://cloud.ibm.com/docs/services/blockchain/howto?topic=blockchain-ibp-console-app#ibp-console-app-profile) to download the connection profile for your contract.  
-    
+    a. Follow the [instructions](https://cloud.ibm.com/docs/services/blockchain/howto?topic=blockchain-ibp-console-app#ibp-console-app-profile) to download the connection profile for your contract.  
     b. In your IBM Blockchain Platform UI, click on "Wallet" and select the user you will use to connect to your blockchain, then click "Export".  
     
-    Hint:  If you created your IBM Blockchain Platform instance just for this tutorial, use your 'admin' or 'Org1 admin' credentials.  
+    Hint:  If you created your IBM Blockchain Platform instance just for this tutorial, use your 'Org1 admin' credentials.  
 
 7.  **Install and configure the provided Postman collection**  
 
-    ***Import the collection***  
-    In the Postman UI, click the "Import" button to import the provided BlockchainCloudFunctions.postman_collection.json Postman collection.  
-    
-    TODO: provide location in cloned repo from step 1  
+    ***Import the Postman collection***  
+    In the Postman UI, click the "Import" button to import the file:  
+     `tutorials/cf-send-to-blockchain/BlockchainCloudFunctions.postman_collection.json`  
     
     ***Import the environment***  
-    In the Postman UI, click the environment settings gear to "Manage Environments", then click the "Import" button to import the provided cloud-functions.postman_environment.json Postman environment.  
+    In the Postman UI, click the environment settings gear to "Manage Environments", then click the "Import" button to import the file:  
+    `tutorials/cf-send-to-blockchain/cloud-functions.postman_environment.json` 
     
     ***Configure the environment***  
-    a. Click on the imported "cloud-functions" environment to see the defined Postman environment variables.  
-    
-    b. Open the blockchain connection profile that you downloaded, copy the entire contents and paste those contents into the the Postman environment "connectonJson" value.  
-    
+    a. Click on the imported "cloud-functions" environment to see the defined Postman environment variables.  
+    b. Open the blockchain connection profile that you downloaded, copy the entire contents and paste those contents into the the Postman environment "connectonJson" value.  
     c. Open the credential file that you downloaded and copy the value of "private_key" into the Postman environment "privateKey" value.  
-    
     d. From the same credential file, copy the value of "cert" into the Postman environment "userCert" value.  
-    
+      
     Note: Record the value of the "name" field from the credential file, as you will need it in an upcoming step.   
 
 8.  **Store your blockchain credentials in Cloudant**  
@@ -148,13 +136,13 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     Click on the request "Body" tab and edit the JSON: 
 
     ```
-    { 
-      "id": "admin-myFabric",  
-      "contract": "iot-shipping-contract",  
-      "username": "admin",  
-      "cert": {{userCert}}, 
-      "key": {{privateKey}}, 
-      "connection": {{connectionJson}} 
+    {  
+      "id": "admin-myFabric",  
+      "contract": "iot-shipping-contract",  
+      "username": "admin",  
+      "cert": {{userCert}},  
+      "key": {{privateKey}},  
+      "connection": {{connectionJson}} 
     }
     ```  
     - Supply any value for "id".  This will be the value you send with each transaction.  
