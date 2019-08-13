@@ -40,7 +40,7 @@ After the prerequisites are installed, it should take you about 45 minutes to co
 
 **Steps**
 
-1.  **Clone the repository**  
+1.  **Clone the repository**  
     `git clone https://github.com/IBM/ibm-cloud-functions-serverless-blockchain.git`  
     Note: All directories mentioned in this tutorial are relative to the base directory of this project.  
 
@@ -52,15 +52,15 @@ After the prerequisites are installed, it should take you about 45 minutes to co
 3.  **Deploy the provided cloud functions**  
 
     ***Deploy the send-to-blockchain cloud function to your IBM Cloud account***   
-    a. Add your cloudant URL to line 8 of send-to-blockchain.js and save the file:  
-    const dbUrl = "\<add-your-cloudant-url-here\>"  
-    b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
+    a. Add your cloudant URL to line 8 of send-to-blockchain.js and save the file:  
+    `const dbUrl = "\<add-your-cloudant-url-here\>"`  
+    b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
     `cd cloud-functions/send-to-blockchain`  
     c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
-    `$ docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
+    `docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
     Once inside the container, run `npm i` then `exit`.  
     d. Zip up the source code and generated node\_modules directory for the action:  
-    `$ zip -r action.zip *`  
+    `zip -r action.zip *`  
     e. Create the action in your IBM Cloud account:  
     `ibmcloud wsk action create send-to-blockchain \--kind nodejs:8 action.zip`  
     
