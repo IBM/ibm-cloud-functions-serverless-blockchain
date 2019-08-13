@@ -175,14 +175,15 @@ After the prerequisites are installed, it should take you about 30 minutes to co
 
     ***Set your request parameters***  
     Click on the request "Body" tab and edit the JSON:  
-    ```  
-    {
+
+    ```
+    { 
       "id": "admin-myFabric",
       "fcn": "createShipment",
       "args": [ "1000", "Shipment of widgets",
         "30.2672", "97.7431", "103", ".35" ]
     }
-    ```
+    ```  
     Supply the value for "id" that you used in the previous step. This specifies the credentials you will use to send transactions to your blockchain.  
 
     ***Send the request***  
