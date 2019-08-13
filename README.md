@@ -147,21 +147,23 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     ***Set your request parameters***  
     Click on the request "Body" tab and edit the JSON:  
 
-    ```
-    { 
+    ```  
+    {  
       "id": "admin-myFabric",  
       "contract": "iot-shipping-contract",  
       "username": "admin",  
-      "cert": {{userCert}}, 
-      "key": {{privateKey}}, 
-      "connection": {{connectionJson}} 
-    }
+      "cert": {{userCert}},  
+      "key": {{privateKey}},  
+      "connection": {{connectionJson}}  
+    }  
     ```  
+    
     - Supply any value for "id".  This will be the value you send with each transaction.  
-    - For username, supply the name of the user you noted from the credential file in a previous step.  If your display name does not match your user's name, e.g. if your display name in your blockchain platform for your user is "Org1 admin" but you know you used the "admin" user credentials for that user, supply "admin" for "username" in the request body.  
+    - For "username", supply the name of the user you noted from the credential file in a previous step.  If your display name does not match your user's name, e.g. if your display name in your blockchain platform for your user is "Org1 admin" but you used the "admin" user credentials for that user, supply "admin" for "username" in the request body.  
 
     ***Send the request***  
     Save your changes and click "Send" to store your credentials in your Cloudant database.  You will use these credentials to send each transaction to your blockchain.  
+    
 
 9.  **Send a transaction to your blockchain**  
 
