@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "cdd8481c-d7c9-475d-b087-09f2b268bc29",
+		"name": "Blockchain Cloud Functions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create or update credentials",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<your-API-key-password-here>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "<your-API-key-user-here>",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"admin-myFabric\",\n  \"contract\": \"iot-shipping-contract\",\n  \"username\": \"admin\",\n  \"cert\": {{userCert}},\n  \"key\": {{privateKey}},\n  \"connection\": {{connectionJson}}\n}"
+				},
+				"url": {
+					"raw": "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/<your-org-here>/actions/store-credentials-cloudant",
+					"protocol": "https",
+					"host": [
+						"us-south",
+						"functions",
+						"cloud",
+						"ibm",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"namespaces",
+						"<your-org-here>",
+						"actions",
+						"store-credentials-cloudant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send transaction",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "<your-API-key-password-here>",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "<your-API-key-user-here>",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"admin-myFabric\",\n  \"fcn\": \"createShipment\",\n  \"args\": [ \"1000\", \"Shipment of widgets\", \"30.2672\", \"97.7431\", \"103\", \".35\" ]\n}"
+				},
+				"url": {
+					"raw": "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/<your-org-here>/actions/send-to-blockchain",
+					"protocol": "https",
+					"host": [
+						"us-south",
+						"functions",
+						"cloud",
+						"ibm",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"namespaces",
+						"<your-org-here>",
+						"actions",
+						"send-to-blockchain"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
