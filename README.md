@@ -1,6 +1,6 @@
 # **Use Cloud Functions to Send Your Data to Your Blockchain**
 
-This tutorial will show you how to use IBM Cloud Functions to connect your devices and applications to your blockchain. We\'ll provide code for two cloud functions and step-by-step instructions to deploy and test those cloud functions, allowing you to store your blockchain credentials in your Cloudant database and use those credentials to securely send transactions to your blockchain.  
+In this tutorial, we'll show you how to use IBM Cloud Functions to connect your devices and applications to your blockchain. We'll provide code for two cloud functions and step-by-step instructions to deploy and test those cloud functions, allowing you to store your blockchain credentials in your Cloudant database and use those credentials to securely send transactions to your blockchain.  
 
 **Learning objectives**
 
@@ -14,7 +14,7 @@ When you finish this tutorial, you will have: 
 
 **Prerequisites**
 
-In this tutorial, you will need an IBM Cloud account, an IBM Blockchain Platform instance, Docker and Node.js installed on your local machine, and a test utility such as curl, Postman or Node-RED to make REST calls.  This tutorial will show you how to use Postman for testing.  
+For this tutorial, you will need an IBM Cloud account, an IBM Blockchain Platform instance, Docker and Node.js installed on your local machine, and a test utility such as curl, Postman or Node-RED to make REST calls.  This tutorial will show you how to use Postman for testing.  
 
 Before you start, you need to prepare the following products to complete this tutorial: 
 
@@ -22,7 +22,7 @@ Before you start, you need to prepare the following products to complete this tu
 
 -   [IBM Blockchain Platform](https://cloud.ibm.com/catalog/services/blockchain-platform) - Follow the [instructions](https://cloud.ibm.com/docs/services/blockchain/howto?topic=blockchain-ibp-console-build-network) to build a blockchain network. 
 
--   [Cloudant](https://cloud.ibm.com/catalog/services/cloudant) - Note the \"url\" from the Cloudant service credentials. Do not create a database. 
+-   [Cloudant](https://cloud.ibm.com/catalog/services/cloudant) - Install and note the \"url\" from the Cloudant service credentials. Do not create a database. 
 
 -   [Docker](https://docs.docker.com/install/) 
 
@@ -32,7 +32,7 @@ Before you start, you need to prepare the following products to complete this tu
 
 Note: You may opt for a free 30-day Kubernetes cluster and a free 30-day IBM Blockchain Platform instance when deploying IBM Blockchain Platform to a free Kubernetes cluster.  The free Kubernetes cluster is deleted automatically after 30 days. 
 
-Why are Docker and Node.js needed?  You will need these tools to build the cloud functions, including creating the correct node\_modules directory for the cloud function runtime environment, before you upload them to your IBM Cloud account. 
+Why are Docker and Node.js needed?  You will need these tools to build the cloud functions, including creating the correct node_modules directory for the cloud function runtime environment, before you upload them to your IBM Cloud account. 
 
 **Estimated time** 
 
@@ -42,7 +42,7 @@ After the prerequisites are installed, it should take you about 45 minutes to co
 
 1.  **Clone the repository**  
     `git clone https://github.com/IBM/ibm-cloud-functions-serverless-blockchain.git`  
-    Note: All directories mentioned in this tutorial are relative to the base directory of this project.  
+    Note: All directories mentioned in this tutorial are relative to the `ibm-cloud-functions-serverless-blockchain` base directory of this project.  
 
 2.  **Install the IBM Cloud CLI**  
     Follow the [installation instructions](https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started) to install the IBM Cloud command-line tool. Make sure you run the test action  
@@ -52,10 +52,11 @@ After the prerequisites are installed, it should take you about 45 minutes to co
 3.  **Deploy the provided cloud functions**  
 
     ***Deploy the send-to-blockchain cloud function to your IBM Cloud account***   
-    a. Add your cloudant URL to line 8 of send-to-blockchain.js and save the file:  
-    `const dbUrl = "\<add-your-cloudant-url-here\>"`  
-    b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
+    a. Change directories to the send-to-blockchain cloud function directory:  
     `cd cloud-functions/send-to-blockchain`  
+    b. Add your cloudant URL to line 8 of send-to-blockchain.js:    
+    `const dbUrl = "\<add-your-cloudant-url-here\>"`  
+    and save the file.  
     c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
     `docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
     Once inside the container, run `npm i` then `exit`.  
@@ -66,11 +67,11 @@ After the prerequisites are installed, it should take you about 45 minutes to co
     
 
     ***Deploy the store-credentials-cloudant cloud function to your IBM Cloud account***  
-    a. Add your cloudant URL to line 7 of store-credentials-cloudant.js:  
+    a. Change directories to the store-credentials-cloudant cloud function directory:  
+    `cd cloud-functions/store-credentials-cloudant`  
+    b. Add your cloudant URL to line 7 of store-credentials-cloudant.js:  
     `const dbUrl = "<add-your-cloudant-url-here>"`  
     and save the file.  
-    b. Log into IBM cloud and change to your local directory that contains the source code for the cloud function.  
-    `cd cloud-functions/store-credentials-cloudant`  
     c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
     `docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`  
     Once inside the container, run `npm i` then `exit`.  
@@ -81,7 +82,7 @@ After the prerequisites are installed, it should take you about 45 minutes to co
 
 4.  **Obtain the API key and URLs for your cloud functions**  
 
-    a. From the IBM Cloud menu, select "Functions".  
+    a. From your browser, navigate to [IBM Cloud](https://www.ibm.com/cloud) and from the menu, select "Functions".  
     b. In the next menu, click on "Actions", then click on the "send-to-blockchain" action.  
     c. In the next menu, click on "Endpoints", then click on "API-KEY" on the resulting panel.  
     d. In the section "CF-based API key for this namespace" click the eye icon to view your API key and copy the API key.  
