@@ -58,7 +58,7 @@ After the prerequisites are installed, it should take you about 45 minutes to co
     `const dbUrl = "\<add-your-cloudant-url-here\>"`  
     and save the file.  
     c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
-    `docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
+    `docker run -it -v $PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
     Once inside the container, run `npm i` then `exit`.  
     d. Zip up the source code and generated node\_modules directory for the action:  
     `zip -r action.zip *`  
@@ -73,7 +73,7 @@ After the prerequisites are installed, it should take you about 45 minutes to co
     `const dbUrl = "<add-your-cloudant-url-here>"`  
     and save the file.  
     c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
-    `docker run -it -v \$PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`  
+    `docker run -it -v $PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`  
     Once inside the container, run `npm i` then `exit`.  
     d. Zip up the source code and generated node_modules directory for the action:  
     `zip -r action.zip *`  
