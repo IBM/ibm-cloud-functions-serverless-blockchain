@@ -45,8 +45,8 @@ After the prerequisites are installed, it should take you about 45 minutes to co
     Note: All directories mentioned in this tutorial are relative to the `ibm-cloud-functions-serverless-blockchain` base directory of this project.  
 
 2.  **Install the IBM Cloud CLI**  
-    Follow the [installation instructions](https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started) to install the IBM Cloud command-line tool. Make sure you run the test action  
-    `ibmcloud wsk action invoke /whisk.system/utils/echo -p message hello --result\`  
+    Follow the [installation instructions](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-cli_install#cli_plugin_setup) to install the IBM Cloud command-line tool. Make sure you run the test action  
+    `ibmcloud fn action invoke /whisk.system/utils/echo -p message hello --result`  
     so that your  ~/.wskprops  is pointing to the right account. 
 
 3.  **Deploy the provided cloud functions**  
@@ -55,12 +55,12 @@ After the prerequisites are installed, it should take you about 45 minutes to co
     a. Change directories to the send-to-blockchain cloud function directory:  
     `cd cloud-functions/send-to-blockchain`  
     b. Add your cloudant URL to line 8 of send-to-blockchain.js:    
-    `const dbUrl = "\<add-your-cloudant-url-here\>"`  
+    `const dbUrl = "<add-your-cloudant-url-here>"`  
     and save the file.  
     c. Generate the node\_modules directory with the correct OS for the machine the cloud function will run on by running this command without changes:  
     `docker run -it -v $PWD:/nodejsAction openwhisk/action-nodejs-v8 /bin/bash`
     Once inside the container, run `npm i` then `exit`.  
-    d. Zip up the source code and generated node\_modules directory for the action:  
+    d. Zip up the source code and generated node_modules directory for the action:  
     `zip -r action.zip *`  
     e. Create the action in your IBM Cloud account:  
     `ibmcloud wsk action create send-to-blockchain \--kind nodejs:8 action.zip`  
