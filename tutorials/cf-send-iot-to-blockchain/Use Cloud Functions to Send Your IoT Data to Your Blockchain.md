@@ -117,11 +117,8 @@ After the prerequisites are installed, it should take you about 30 minutes to co
       }  
     }
     ```  
-
-
-   e. In your Postman environment, create the variable "rule-id" and give it the value of the "id" (without quotes) from the `2. POST IoTP Rule` REST call.  
-   f. Click on the REST call `3. PATCH Activate rule` and click `Send`. You should see a result similar to:  
-   
+    e. In your Postman environment, create the variable "rule-id" and give it the value of the "id" (without quotes) from the `2. POST IoTP Rule` REST call.  
+    f. Click on the REST call `3. PATCH Activate rule` and click `Send`. You should see a result similar to:  
    
    ```  
    {  
