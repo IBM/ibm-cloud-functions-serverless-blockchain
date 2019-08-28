@@ -119,23 +119,19 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     ```  
     e. In your Postman environment, create the variable "rule-id" and give it the value of the "id" (without quotes) from the `2. POST IoTP Rule` REST call.  
     f. Click on the REST call `3. PATCH Activate rule` and click `Send`. You should see a result similar to:  
-   
-   ```  
-   {  
-     "message": "CUDIM0300I: State update configuration for Device Type 'iotsensor-type' has been successfully submitted for activation.",  
-     "details": {  
-       "id": "CUDIM0300I",  
-       "properties": [  
-         "Device Type",  
-         "iotsensor-type"  
-       ]  
-     },  
-     "failures": []  
-   }  
-   
-   ```  
-   
-   
+    ```  
+    {  
+      "message": "CUDIM0300I: State update configuration for Device Type 'iotsensor-type' has been successfully submitted for activation.",  
+      "details": {  
+        "id": "CUDIM0300I",  
+        "properties": [  
+          "Device Type",  
+          "iotsensor-type"  
+        ]  
+      },  
+      "failures": []  
+    }  
+    ```  
 7.  **Create an action in IBM Watson IoT Platform**  
     a. In your Postman environment, create the variable "action-targetUrl" (without quotes) and give it the value of the URL for the send-to-blockchain action from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     b. In your Postman environment, create the variable "action-username" and give it the value of the "user" portion of your Cloud Functions API key  (without quotes) from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
@@ -143,9 +139,8 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     c. In your Postman environment, create the variable "action-password" and give it the value of the "password" portion of your Cloud Functions API key (without quotes) from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     Reminder: The Cloud Functions API key consists of user:password. Supply the portion after the ':' for the "action-password" value.  
     d. In the Postman UI, click on the REST call `4. POST IoTP action` and click `Send`. You should see a result similar to:  
-   
-   ```  
-   {
+    ```  
+    {
       "id": "5d66bce2293575001e3d61a1",
       "name": "SendToBlockchain",
       "description": "Send a transaction to a blockchain",
@@ -168,17 +163,14 @@ After the prerequisites are installed, it should take you about 30 minutes to co
         "headers": [],
         "body": "{{{ruleTriggerJSON}}}"
       }
-   }  
-   
-   ```  
-   e. In your Postman environment, create the variable "action-id" and give it the value of the "id" (without quotes) from the `4.POST IoTP action` REST call.
+    }  
+    ```  
+    e. In your Postman environment, create the variable "action-id" and give it the value of the "id" (without quotes) from the `4.POST IoTP action` REST call.
     
 8.  **Create a trigger in IBM Watson IoT Platform**  
     a. In the Postman UI, click on the REST call `5. POST IoTP Trigger` and click `Send`. You should see a result similar to:  
-    
-   
-   ```  
-   {
+    ```  
+    {
       "id": "5d66c1d7dacfe1001f89cb67",
       "name": "SendToBlockchainTrigger",
       "description": "Trigger that invokes the SendToBlockchain action when rule FireOnEveryEvent fires",
@@ -199,11 +191,8 @@ After the prerequisites are installed, it should take you about 30 minutes to co
         "typeId": "iotsensor-type",
         "instanceId": "iotsensor"
       }
-   }  
-   
-   ```     
-
-
+    }  
+    ```     
 9.  **Send IoT data to IBM Watson IoT Platform**  
     a. From your IBM Cloud account, launch your Node-RED flow editor.  
     b. Click `Send IoT device data to IoTP`.  This will send a transaction to Watson IoT Platform, which is now configured to send every event to your blockchain.  
