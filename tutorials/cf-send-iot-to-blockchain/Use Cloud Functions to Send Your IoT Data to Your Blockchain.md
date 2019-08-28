@@ -78,7 +78,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
 
     ***Import the Postman collection***  
     In the Postman UI, click the "Import" button to import the file:  
-     `tutorials/cf-send-iot-to-blockchain/IoTPAPICalls.postman_collection.json`  
+     `tutorials/cf-send-iot-to-blockchain/iot-api-calls.postman_collection.json`  
      
      ***Create a Postman environment***  
     a. In the Postman UI, click on the environment settings gear to "Manage Environments", then click the "Add" button to create a new environment.  
