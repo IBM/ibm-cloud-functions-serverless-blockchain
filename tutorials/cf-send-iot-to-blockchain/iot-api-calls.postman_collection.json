@@ -1,0 +1,867 @@
+{
+	"info": {
+		"_postman_id": "7e8a5590-aeff-4eda-bc0f-b6ad55108039",
+		"name": "IoTP API Calls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. GET all active logical interfaces",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://d807by.internetofthings.ibmcloud.com/api/v0002/logicalinterfaces",
+					"protocol": "https",
+					"host": [
+						"d807by",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"logicalinterfaces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. POST IoTP Rule",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"FireOnEveryEvent\",\n   \"description\": \"Rule to fire on every event\",\n   \"condition\": \"$state.id = $state.id\"\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/draft/logicalinterfaces/{{logical-if}}/rules",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"draft",
+						"logicalinterfaces",
+						"{{logical-if}}",
+						"rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. PATCH Activate rule",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"operation\": \"activate-configuration\"\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/draft/device/types/iotsensor-type",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"draft",
+						"device",
+						"types",
+						"iotsensor-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. POST IoTP action",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"SendToBlockchain\",\n  \"type\": \"webhook\",\n  \"description\": \"Send a transaction to a blockchain\",\n  \"configuration\": {\n    \"targetUrl\" : \"{{action-targetUrl}}\",\n    \"method\" : \"POST\",\n    \"contentType\" : \"application/json\",\n    \"username\": \"{{action-username}}\",\n    \"password\": \"{{action-password}}\",\n    \"headers\" : [],\n    \"body\" : \"{{{ruleTriggerJSON}}}\"\n  },\n  \"enabled\": true\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. POST IoTP Trigger",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"SendToBlockchainTrigger\",\n  \"type\": \"rule\",\n  \"description\": \"Trigger that invokes the SendToBlockchain action when rule FireOnEveryEvent fires\",\n  \"configuration\": {\n    \"logicalInterfaceId\": \"{{logical-if}}\",\n    \"ruleId\": \"{{rule-id}}\",\n    \"type\": \"device\",\n    \"typeId\": \"iotsensor-type\",\n    \"instanceId\": \"iotsensor\"\n  },\n  \"variableMappings\": {\n    \"ruleTriggerJSON\": \"$event.state\"\n  },\n  \"enabled\": true\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}/triggers",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}",
+						"triggers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE IoTP Trigger",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}/triggers/{{trigger-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}",
+						"triggers",
+						"{{trigger-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE IoTP Rule",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/draft/logicalinterfaces/{{logical-if}}/rules/{{rule-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"draft",
+						"logicalinterfaces",
+						"{{logical-if}}",
+						"rules",
+						"{{rule-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT IoTP action",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{action-id}}\",\n  \"name\": \"SendToBlockchain\",\n  \"type\": \"webhook\",\n  \"description\": \"Send a transaction to a blockchain\",\n  \"configuration\": {\n    \"targetUrl\" : \"{{action-targetUrl}}\",\n    \"method\" : \"POST\",\n    \"contentType\" : \"application/json\",\n    \"username\": \"{{action-username}}\",\n    \"password\": \"{{action-password}}\",\n    \"headers\" : [],\n    \"body\" : \"{{{ruleTriggerJSON}}}\"\n  },\n  \"enabled\": true\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT IoTP Trigger",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{trigger-id}}\",\n  \"name\": \"SendToBlockchainTrigger\",\n  \"type\": \"rule\",\n  \"description\": \"Trigger that invokes the SendToBlockchain action when rule FireOnEveryEvent fires\",\n  \"configuration\": {\n    \"logicalInterfaceId\": \"{{logical-if}}\",\n    \"ruleId\": \"{{rule-id}}\",\n    \"type\": \"device\",\n    \"typeId\": \"iotsensor-type\",\n    \"instanceId\": \"iotsensor\"\n  },\n  \"variableMappings\": {\n    \"ruleTriggerJSON\": \"$event.state\"\n  },\n  \"enabled\": true\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}/triggers/{{trigger-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}",
+						"triggers",
+						"{{trigger-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Run action",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n  \"operation\": \"invoke-action\",\n  \"variables\": {\n  \t\"ruleTriggerJSON\": \"{\\\"id\\\": \\\"admin-myFabric\\\",\\\"fcn\\\": \\\"createShipment\\\",\\\"args\\\": [ \\\"1000\\\", \\\"Shipment of widgets\\\", \\\"30.2672\\\", \\\"97.7431\\\", \\\"103\\\", \\\".35\\\" ]}\"\n  }\n}"
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE IoTP Action",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all draft rules",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/draft/rules",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"draft",
+						"rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Draft Rules for Logical Interface",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/draft/logicalinterfaces/{{logical-if}}/rules",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"draft",
+						"logicalinterfaces",
+						"{{logical-if}}",
+						"rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Active Rules for Logical Interface",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/logicalinterfaces/{{logical-if}}/rules",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"logicalinterfaces",
+						"{{logical-if}}",
+						"rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All IoTP Triggers for an Action",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}/triggers",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}",
+						"triggers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET IoTP Action",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions/{{action-id}}",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions",
+						"{{action-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All IoTP Actions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{api-token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{api-key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{org}}.internetofthings.ibmcloud.com/api/v0002/actions",
+					"protocol": "https",
+					"host": [
+						"{{org}}",
+						"internetofthings",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"api",
+						"v0002",
+						"actions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
