@@ -95,6 +95,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     c. In your Postman environment, create the variable "logical-if" and give it the value of the "id" field (without quotes) from the previous step.  This is the id of the logical interface that you will attach your rule to.  
     d. Click on the REST call `2. POST IoTP Rule` and click `Send`.  You should see a result similar to:  
     
+    
     ```
     {  
       "version": "draft",  
@@ -115,9 +116,12 @@ After the prerequisites are installed, it should take you about 30 minutes to co
         "when": "every-time"  
       }  
     }
-```  
+    ```  
+
+
    e. In your Postman environment, create the variable "rule-id" and give it the value of the "id" (without quotes) from the `2. POST IoTP Rule` REST call.  
-   f. Click on the REST call `3. PATCH Activate rule` and click `Send`. You should see:  
+   f. Click on the REST call `3. PATCH Activate rule` and click `Send`. You should see a result similar to:  
+   
    
    ```  
    {  
@@ -134,13 +138,14 @@ After the prerequisites are installed, it should take you about 30 minutes to co
    
    ```  
    
+   
 7.  **Create an action in IBM Watson IoT Platform**  
     a. In your Postman environment, create the variable "action-targetUrl" (without quotes) and give it the value of the URL for the send-to-blockchain action from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     b. In your Postman environment, create the variable "action-username" and give it the value of the "user" portion of your Cloud Functions API key  (without quotes) from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     Reminder: The Cloud Functions API key consists of user:password. Supply the portion before the ':' for the "action-username" value.  
     c. In your Postman environment, create the variable "action-password" and give it the value of the "password" portion of your Cloud Functions API key (without quotes) from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     Reminder: The Cloud Functions API key consists of user:password. Supply the portion after the ':' for the "action-password" value.  
-    d. In the Postman UI, click on the REST call `4. POST IoTP action` and click `Send`. You should see:  
+    d. In the Postman UI, click on the REST call `4. POST IoTP action` and click `Send`. You should see a result similar to:  
    
    ```  
    {
@@ -169,10 +174,13 @@ After the prerequisites are installed, it should take you about 30 minutes to co
    }  
    
    ```  
+   
+   
    e. In your Postman environment, create the variable "action-id" and give it the value of the "id" (without quotes) from the `4.POST IoTP action` REST call.
     
 8.  **Create a trigger in IBM Watson IoT Platform**  
-    a. In the Postman UI, click on the REST call `5. POST IoTP Trigger` and click `Send`. You should see:  
+    a. In the Postman UI, click on the REST call `5. POST IoTP Trigger` and click `Send`. You should see a result similar to:  
+    
    
    ```  
    {
@@ -199,6 +207,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
    }  
    
    ```     
+
 
 9.  **Send IoT data to IBM Watson IoT Platform**  
     a. From your IBM Cloud account, launch your Node-RED flow editor.  
