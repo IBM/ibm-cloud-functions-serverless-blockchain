@@ -1,6 +1,6 @@
 # **Use Watson IoT Platform and Cloud Functions to Send IoT Data to Your Blockchain**
 
-In this tutorial, we'll show you how to configure a rule in Watson IoT Platform to call a blockchain IBM Cloud Function, allowing you to send your IoT device data to your blockchain.  If you first follow the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial, you will have a blockchain, smart contract and cloud functions to use with this tutorial.  
+In this tutorial, we'll show you how to configure a rule in Watson IoT Platform to call a blockchain IBM Cloud Function, allowing you to send your IoT device data to your blockchain.  If you first follow the [Use Cloud Functions to Send Your Data to Your Blockchain](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/blob/master/tutorials/cf-send-to-blockchain/Use%20Cloud%20Functions%20to%20Send%20Your%20Data%20to%20Your%20Blockchain.md) tutorial, you will have a blockchain, smart contract and cloud functions to use with this tutorial.  
 
 **Learning objectives**
 
@@ -23,7 +23,7 @@ Note: You may opt for a free 30-day IBM Watson IoT Platform Lite instance which
 
 -   [Node-RED](https://cloud.ibm.com/catalog/starters/node-red-starter)   
 
-You will also need the blockchain, smart contract, cloud functions and Postman from the [Use Cloud Functions to Send Your Data to Your Blockchain](http://ibm.developer.com) tutorial.  
+You will also need the blockchain, smart contract, cloud functions and Postman from the [Use Cloud Functions to Send Your Data to Your Blockchain"](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/blob/master/tutorials/cf-send-to-blockchain/Use%20Cloud%20Functions%20to%20Send%20Your%20Data%20to%20Your%20Blockchain.md) tutorial.  
 
 **Estimated time** 
 
