@@ -174,8 +174,6 @@ After the prerequisites are installed, it should take you about 30 minutes to co
    }  
    
    ```  
-   
-   
    e. In your Postman environment, create the variable "action-id" and give it the value of the "id" (without quotes) from the `4.POST IoTP action` REST call.
     
 8.  **Create a trigger in IBM Watson IoT Platform**  
