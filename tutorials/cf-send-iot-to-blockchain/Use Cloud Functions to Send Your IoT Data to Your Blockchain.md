@@ -23,19 +23,15 @@ Note: You may opt for a free 30-day IBM Watson IoT Platform Lite instance which
 
 -   [Node-RED](https://cloud.ibm.com/catalog/starters/node-red-starter)   
 
-You will also need the blockchain, smart contract, cloud functions and Postman from the [Use Cloud Functions to Send Your Data to Your Blockchain"](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/blob/master/tutorials/cf-send-to-blockchain/Use%20Cloud%20Functions%20to%20Send%20Your%20Data%20to%20Your%20Blockchain.md) tutorial.  
+You will also need the blockchain, smart contract, cloud functions, github.com repository and Postman from the [Use Cloud Functions to Send Your Data to Your Blockchain"](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/blob/master/tutorials/cf-send-to-blockchain/Use%20Cloud%20Functions%20to%20Send%20Your%20Data%20to%20Your%20Blockchain.md) tutorial.  
 
 **Estimated time** 
 
 After the prerequisites are installed, it should take you about 30 minutes to complete this tutorial. 
 
 **Steps**
-
-1. **Clone the repository**  
-    `git clone https://github.com/IBM/ibm-cloud-functions-serverless-blockchain.git`  
-    Note: All directories mentioned in this tutorial are relative to the `ibm-cloud-functions-serverless-blockchain` base directory of this project.
     
-2. **Create a device in IBM Watson IoT Platform**  
+1. **Create a device in IBM Watson IoT Platform**  
     a. From your IBM Cloud account, launch your IBM Watson IoT Platform instance.  
     b. Click on Devices in the menu, then click `Add Device`.  
     c. Use `iotsensor-type` for the device type and click `Create device type iotsensor-type`  
@@ -46,7 +42,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     ![](AddToken.png)
     g. Click `Finish` and be sure to note your device token. You will need this token in a future step.
 
-3.  **Load and configure the supplied Node-RED Flow**  
+2.  **Load and configure the supplied Node-RED Flow**  
     a. From your IBM Cloud account, launch your Node-RED flow editor.  
     b. Go to Import -> Clipboard and click `select a file to import`  
     c. Select the file `tutorials/cf-send-iot-to-blockchain/node-red-iot-device-sim.json` from the repository you cloned.  
@@ -57,7 +53,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     f. Click `Update`, then click `Done`, then click `Deploy` to activate your changes. You should see a green connected status for your `Publish to IoT` node.  
     g. Click `Send IoT device data to IoTP`.  This will populate the last event cache in Watson IoT Platform.
     
-4.  **Create an interface for your device type in IBM Watson IoT Platform**  
+3.  **Create an interface for your device type in IBM Watson IoT Platform**  
     a. In your IBM Watson IoT Platform UI, click on Devices in the menu, then click `Device Types`, then click on the device type `iotsensor-type`.  
     b. Click on `Interface`, click on `Advanced Flow`, then click on  `Create Physical Interface`.  
     ![](CreatePhysicalInterface.png)
@@ -74,11 +70,12 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     j. Click `Done`, click `Activate`, click `Activate` again, then click `Done`.  
     ![](Activated.png)
     
-5.  **Install and configure the provided Postman collection**  
+4.  **Install and configure the provided Postman collection**  
 
     ***Import the Postman collection***  
     In the Postman UI, click the "Import" button to import the file:  
-     `tutorials/cf-send-iot-to-blockchain/iot-api-calls.postman_collection.json`  
+    `tutorials/cf-send-iot-to-blockchain/iot-api-calls.postman_collection.json`  
+    This file is available in the repository you cloned as a part of the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.
      
      ***Create a Postman environment***  
     a. In the Postman UI, click on the environment settings gear to "Manage Environments", then click the "Add" button to create a new environment.  
@@ -89,7 +86,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     e. Click "Persist All" and click "Add" to create your environment.  
     g. Select your new environment from the drop-down list to use the API key and org values you just defined.  All the API calls in this collection will use these values automatically, in the URLs and for basic authorization.  
 
-6.  **Create a rule in IBM Watson IoT Platform**  
+5.  **Create a rule in IBM Watson IoT Platform**  
     a. In the Postman UI, click on the REST call `1. GET all active logical interfaces` and click `Send`.  
     b. In the results returned from the REST call, find the result with the name "iotsensor-type_LI" and note the value of the "id" field.  
     c. In your Postman environment, create the variable "logical-if" and give it the value of the "id" field (without quotes) from the previous step.  This is the id of the logical interface that you will attach your rule to.  
@@ -132,7 +129,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
       "failures": []  
     }  
     ```  
-7.  **Create an action in IBM Watson IoT Platform**  
+6.  **Create an action in IBM Watson IoT Platform**  
     a. In your Postman environment, create the variable "action-targetUrl" (without quotes) and give it the value of the URL for the send-to-blockchain action from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     b. In your Postman environment, create the variable "action-username" and give it the value of the "user" portion of your Cloud Functions API key  (without quotes) from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial.  
     Reminder: The Cloud Functions API key consists of user:password. Supply the portion before the ':' for the "action-username" value.  
@@ -167,7 +164,7 @@ After the prerequisites are installed, it should take you about 30 minutes to co
     ```  
     e. In your Postman environment, create the variable "action-id" and give it the value of the "id" (without quotes) from the `4.POST IoTP action` REST call.
     
-8.  **Create a trigger in IBM Watson IoT Platform**  
+7.  **Create a trigger in IBM Watson IoT Platform**  
     a. In the Postman UI, click on the REST call `5. POST IoTP Trigger` and click `Send`. You should see a result similar to:  
     ```  
     {
@@ -193,11 +190,11 @@ After the prerequisites are installed, it should take you about 30 minutes to co
       }
     }  
     ```     
-9.  **Send IoT data to IBM Watson IoT Platform**  
+8.  **Send IoT data to IBM Watson IoT Platform**  
     a. From your IBM Cloud account, launch your Node-RED flow editor.  
     b. Click `Send IoT device data to IoTP`.  This will send a transaction to Watson IoT Platform, which is now configured to send every event to your blockchain.  
 
-10. **Look for a new block in your blockchain**  
+9. **Look for a new block in your blockchain**  
     a. In your IBM Blockchain Platform UI, from the "Use Cloud Functions to Send Your Data to Your Blockchain" tutorial, click on "Channels".  
     b. Click on the channel you created when setting up your blockchain network.  
     c. Scroll down to "Block History" and click on the most recent block.  
