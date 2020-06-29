@@ -1,8 +1,8 @@
 # **Blockchain Client Cloud Functions**
 
 This repo supports two tutorials and the cloud function source code used in the tutorials:  
-- [How to send your data to your blockchain using cloud functions](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/tutorials/cf-send-to-blockchain)  
-- [How to connect your IBM Watson IoT Platform to your blockchain cloud functions](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/tutorials/cf-send-iot-to-blockchain)  
+- [How to send your data to your blockchain using cloud functions](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/blob/master/tutorials/cf-send-to-blockchain/Use%20Cloud%20Functions%20to%20Send%20Your%20Data%20to%20Your%20Blockchain.md)  
+- [How to connect your IBM Watson IoT Platform to your blockchain cloud functions](https://github.com/IBM/ibm-cloud-functions-serverless-blockchain/blob/master/tutorials/cf-send-iot-to-blockchain/Use%20Cloud%20Functions%20to%20Send%20Your%20IoT%20Data%20to%20Your%20Blockchain.md)  
 
 
 ### **Participation**
